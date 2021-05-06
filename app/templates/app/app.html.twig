@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+    {% block stylesheets %}
+        <style>
+            main {
+                width: 100%;
+                display: flex;
+                flex-direction: row;
+                height: 80vh;
+            }
+            nav {
+                width: fit-content;
+                padding-right: 3rem;
+                border-right: 2px #b6b6b6 solid;
+                margin-right: 2rem;
+            }
+        </style>
+    {% endblock %}
+
+    {% block body %}
+
+        <h1>
+            app
+        </h1>
+        <hr>
+
+        <main>
+            <nav>
+                <ul>
+                    <li><a href="{{ path('dashboard_index') }}" role="navigation">Dashboard</a></li>
+                    <li><a href="{{ path('solutions_index') }}" role="navigation">Solutions</a></li>
+                    <li><a href="{{ path('courses_index') }}" role="navigation">Courses</a></li>
+                </ul>
+
+                {#
+                <a href="{{ path('/problems') }}" role="navigation">Problems</a>
+                <a href="{{ path('/solutions') }}" role="navigation">Solutions</a>
+                <a href="{{ path('/rank') }}" role="navigation">Rank</a>
+                <a href="{{ path('/settings') }}" role="navigation">Settings</a>
+                #}
+
+            </nav>
+
+            <section>
+                {% block section %}{% endblock %}
+            </section>
+        </main>
+    {% endblock %}

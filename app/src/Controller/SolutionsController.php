@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Root controller.
+ * Solutions controller.
  */
 
 namespace App\Controller;
@@ -10,23 +11,25 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * Class RootController.
+ * Class SolutionsController.
  */
-class RootController extends AbstractController
+class SolutionsController extends AbstractController
 {
     /**
-     * Index action - redirect to DashboardController.
+     * Index action.
      *
      * @return Response
      *
      * @Route(
-     *     "/",
+     *     "/solutions",
      *     methods={"GET"},
-     *     name="root_index",
+     *     name="solutions_index"
      * )
      */
     public function index(): Response
     {
-        return $this->redirectToRoute('dashboard_index');
+        return $this->render (
+            'app/solutions/index.html.twig'
+        );
     }
 }

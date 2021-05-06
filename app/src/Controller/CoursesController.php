@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Root controller.
+ * Courses controller.
  */
 
 namespace App\Controller;
@@ -10,23 +11,23 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * Class RootController.
+ * Class CoursesController.
  */
-class RootController extends AbstractController
+class CoursesController extends AbstractController
 {
     /**
-     * Index action - redirect to DashboardController.
+     * Index action.
      *
      * @return Response
      *
      * @Route(
-     *     "/",
+     *     "/courses",
      *     methods={"GET"},
-     *     name="root_index",
+     *     name="courses_index"
      * )
      */
     public function index(): Response
     {
-        return $this->redirectToRoute('dashboard_index');
+        return $this->render ('app/courses/index.html.twig');
     }
 }

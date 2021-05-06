@@ -1,6 +1,6 @@
 <?php
 /**
- * Root controller.
+ * Dashboard controller.
  */
 
 namespace App\Controller;
@@ -10,23 +10,23 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * Class RootController.
+ * Class DashboardController.
  */
-class RootController extends AbstractController
+class DashboardController extends AbstractController
 {
     /**
-     * Index action - redirect to DashboardController.
+     * Index action.
      *
      * @return Response
      *
      * @Route(
-     *     "/",
+     *     "/dashboard",
      *     methods={"GET"},
-     *     name="root_index",
+     *     name="dashboard_index",
      * )
      */
     public function index(): Response
     {
-        return $this->redirectToRoute('dashboard_index');
+        return $this->render('app/dashboard/index.html.twig');
     }
 }
