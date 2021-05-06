@@ -5,6 +5,7 @@
 
 namespace App\Controller;
 
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -12,24 +13,27 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * Class HomeController.
  */
-class HomeController
+class HomeController extends AbstractController
 {
     /**
      * Index action.
      *
-     * @param Request $request
+     * @param string $name
      * @return Response
      *
      * @Route(
-     *     "/home",
+     *     "/home/{name}",
      *     methods={"GET"},
      *     name="home_index",
+     *     defaults={"name":"world"},
+     *     requirements={"name": "[a-zA-Z]+"}
      * )
      */
-    public function index(Request $request): Response
+    public function index(string $name): Response
     {
-        $name = $request->query->getAlnum('name');
-
-        return new Response('Hello ' . $name . '!');
+        return $this->render(
+            'home/index.html.twig',
+            ['name' => $name]
+        );
     }
 }
