@@ -6,7 +6,20 @@
 
     {% block section %}
         <h3>Dashboard</h3>
-        <p>
-            Tu będzie lista postów dodanych przez użytkowników
-        </p>
+        <a href="{{ path('dashboard_new') }}">Create new post</a>
+        <div style="padding-top: 2rem">
+            {% for post in posts %}
+                <tr>
+                    <td>{{ post.title }}</td>
+                    <td>
+                        <a href="{{ path('dashboard_show', {'id': post.id}) }}">Show</a>
+                        <a href="{{ path('dashboard_edit', {'id': post.id}) }}">Edit</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="3">No records found</td>
+                </tr>
+            {% endfor %}
+        </div>
     {% endblock %}

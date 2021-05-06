@@ -32,6 +32,14 @@ class Post
      */
     private $title;
 
+    /**
+     * Post constructor.
+     */
+    public function __construct()
+    {
+        $this->created_at = new \DateTime();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
