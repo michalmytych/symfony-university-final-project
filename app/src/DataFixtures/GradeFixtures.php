@@ -3,27 +3,23 @@
 namespace App\DataFixtures;
 
 use App\Entity\Grade;
-use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Faker\Factory;
-use Faker\Generator;
 
-class GradeFixtures extends Fixture
+class GradeFixtures extends AbstractBaseFixtures
 {
-    protected Generator $faker;
-
-    protected ObjectManager $manager;
+    const FIXTURES_AMOUNT = 50;
 
     /**
      * Loads data fixtures into database.
      * @param ObjectManager $manager
      */
-    public function load(ObjectManager $manager): void
+    public function loadData(ObjectManager $manager): void
     {
         $this->faker = Factory::create ();
         $this->manager = $manager;
 
-        for ($i = 0; $i < 10; ++$i) {
+        for ($i = 0; $i < self::FIXTURES_AMOUNT; ++$i) {
             $grade = new Grade();
 
             $grade->setComment($this->faker->sentence);
