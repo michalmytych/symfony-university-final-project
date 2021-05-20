@@ -4,7 +4,6 @@ namespace App\DataFixtures;
 
 use App\Entity\Grade;
 use Doctrine\Persistence\ObjectManager;
-use Faker\Factory;
 
 class GradeFixtures extends AbstractBaseFixtures
 {
@@ -16,9 +15,6 @@ class GradeFixtures extends AbstractBaseFixtures
      */
     public function loadData(ObjectManager $manager): void
     {
-        $this->faker = Factory::create ();
-        $this->manager = $manager;
-
         for ($i = 0; $i < self::FIXTURES_AMOUNT; ++$i) {
             $grade = new Grade();
 

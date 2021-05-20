@@ -4,7 +4,6 @@ namespace App\DataFixtures;
 
 use App\Entity\Post;
 use Doctrine\Persistence\ObjectManager;
-use Faker\Factory;
 
 class PostFixtures extends AbstractBaseFixtures
 {
@@ -16,9 +15,6 @@ class PostFixtures extends AbstractBaseFixtures
      */
     public function loadData(ObjectManager $manager): void
     {
-        $this->faker = Factory::create ();
-        $this->manager = $manager;
-
         for ($i = 0; $i < self::FIXTURES_AMOUNT; ++$i) {
             $post = new Post();
 
