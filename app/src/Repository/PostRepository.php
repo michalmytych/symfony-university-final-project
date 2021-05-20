@@ -4,19 +4,11 @@ namespace App\Repository;
 
 use App\Entity\Post;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\ORM\OptimisticLockException;
-use Doctrine\ORM\ORMException;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 use Exception;
 use Psr\Log\LoggerInterface;
 
-/**
- * @method Post|null find($id, $lockMode = null, $lockVersion = null)
- * @method Post|null findOneBy(array $criteria, array $orderBy = null)
- * @method Post[]    findAll()
- * @method Post[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
- */
 class PostRepository extends ServiceEntityRepository
 {
     /**
@@ -24,7 +16,7 @@ class PostRepository extends ServiceEntityRepository
      *
      * @constant int
      */
-    const PAGINATOR_ITEMS_PER_PAGE = 5;
+    const PAGINATOR_ITEMS_PER_PAGE = 10;
 
     private LoggerInterface $logger;
 

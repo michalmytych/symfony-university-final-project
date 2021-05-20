@@ -24,14 +24,24 @@
             <table class="table table-striped">
                 <thead>
                 <tr>
-                    <th>{{ knp_pagination_sortable(pagination, 'ID: ', 'post.id') }}</th>
-                    <th>{{ knp_pagination_sortable(pagination, 'Opublikowano: ', 'post.created_at') }}</th>
-                    <th>{{ knp_pagination_sortable(pagination, 'Tytuł: ', 'post.title') }}</th>
+                    <th>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-sort-down" viewBox="0 0 16 16">
+                            <path d="M3.5 2.5a.5.5 0 0 0-1 0v8.793l-1.146-1.147a.5.5 0 0 0-.708.708l2 1.999.007.007a.497.497 0 0 0 .7-.006l2-2a.5.5 0 0 0-.707-.708L3.5 11.293V2.5zm3.5 1a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zM7.5 6a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5zm0 3a.5.5 0 0 0 0 1h3a.5.5 0 0 0 0-1h-3zm0 3a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1z"/>
+                        </svg>
+                    </th>
+                    <th>{{ knp_pagination_sortable(pagination, 'ID ', 'post.id') }}</th>
+                    <th>{{ knp_pagination_sortable(pagination, 'Opublikowano ', 'post.created_at') }}</th>
+                    <th>{{ knp_pagination_sortable(pagination, 'Tytuł ', 'post.title') }}</th>
                 </tr>
                 </thead>
                 <tbody>
                 {% for post in pagination.items %}
                     <tr>
+                        <td style="cursor: pointer;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
+                                <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>
+                            </svg>
+                        </td>
                         <td>{{ post.id }}</td>
                         <td>{{ post.createdAt|date('Y/m/d') }}</td>
                         <td>{{ post.title }}</td>
