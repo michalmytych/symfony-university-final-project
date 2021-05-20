@@ -4,7 +4,12 @@ namespace App\Repository;
 
 use App\Entity\Post;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\OptimisticLockException;
+use Doctrine\ORM\ORMException;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
+use Exception;
+use Psr\Log\LoggerInterface;
 
 /**
  * @method Post|null find($id, $lockMode = null, $lockVersion = null)
@@ -14,37 +19,100 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class PostRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
+    /**
+     * Items per page (for paginator).
+     *
+     * @constant int
+     */
+    const PAGINATOR_ITEMS_PER_PAGE = 5;
+
+    private LoggerInterface $logger;
+
+    public function __construct(ManagerRegistry $registry, LoggerInterface $logger)
     {
         parent::__construct($registry, Post::class);
+        $this->logger = $logger;
     }
 
-    // /**
-    //  * @return Post[] Returns an array of Post objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    /**
+     * Query all records.
+     *
+     * @return QueryBuilder Query builder
+     */
+    public function queryAll(): QueryBuilder
     {
-        return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('p.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
+        return $this->getOrCreateQueryBuilder()
+            ->orderBy('post.created_at', 'DESC');
     }
-    */
 
-    /*
-    public function findOneBySomeField($value): ?Post
+    /**
+     * Method for saving Post entities to database with basic error handling.
+     *
+     * @param Post $postEntity
+     */
+    public function save(Post $postEntity) : void
     {
-        return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        $entityManager = $this->getEntityManager();
+        try {
+            $entityManager->persist($postEntity);
+            $entityManager->flush();
+        } catch (Exception $e) {
+            /**
+             * @todo - how to handle errors in production & debug mode
+             */
+            $this->logger->error('Exception thrown',
+                [
+                    'errorCode' => $e->getCode(),
+                    'errorMessage' => $e->getMessage()
+                ]);
+        }
     }
-    */
+
+    /**
+     * Remove selected Post entity from database.
+     *
+     * @param Post $postEntity
+     */
+    public function destroy(Post $postEntity) : void
+    {
+        $entityManager = $this->getEntityManager();
+        try {
+            $entityManager->remove($postEntity);
+            $entityManager->flush();
+        } catch (Exception $e) {
+            $this->logger->error('Exception thrown',
+                [
+                    'errorCode' => $e->getCode(),
+                    'errorMessage' => $e->getMessage()
+                ]);
+        }
+    }
+
+    /**
+     * EntityManager flush wrapper function for use in Controller.
+     */
+    public function flushChanges() : void
+    {
+        $entityManager = $this->getEntityManager();
+        try {
+            $entityManager->flush();
+        } catch (Exception $e) {
+            $this->logger->error('Exception thrown',
+                [
+                    'errorCode' => $e->getCode(),
+                    'errorMessage' => $e->getMessage()
+                ]);
+        }
+    }
+
+    /**
+     * Get or create new query builder.
+     *
+     * @return QueryBuilder Query builder
+     */
+    private function getOrCreateQueryBuilder(): QueryBuilder
+    {
+        $queryBuilder = null;
+        return null ?? $this->createQueryBuilder('post');
+    }
 }

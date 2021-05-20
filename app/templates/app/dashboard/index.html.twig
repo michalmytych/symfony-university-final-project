@@ -6,20 +6,47 @@
 
     {% block section %}
         <h3>Dashboard</h3>
-        <a href="{{ path('dashboard_new') }}">Create new post</a>
-        <div style="padding-top: 2rem">
-            {% for post in posts %}
+        <a href="{{ path('dashboard_new') }}">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
+                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"/>
+            </svg>
+            Create new post
+        </a>
+
+        <hr>
+
+        {% if pagination is defined and pagination.items|length %}
+
+            <div class="navigation text-center">
+                {{ knp_pagination_render(pagination) }}
+            </div>
+
+            <table class="table table-striped">
+                <thead>
                 <tr>
-                    <td>{{ post.title }}</td>
-                    <td>
-                        <a href="{{ path('dashboard_show', {'id': post.id}) }}">Show</a>
-                        <a href="{{ path('dashboard_edit', {'id': post.id}) }}">Edit</a>
-                    </td>
+                    <th>{{ knp_pagination_sortable(pagination, 'ID: ', 'post.id') }}</th>
+                    <th>{{ knp_pagination_sortable(pagination, 'Opublikowano: ', 'post.created_at') }}</th>
+                    <th>{{ knp_pagination_sortable(pagination, 'Tytuł: ', 'post.title') }}</th>
                 </tr>
-            {% else %}
-                <tr>
-                    <td colspan="3">No records found</td>
-                </tr>
-            {% endfor %}
-        </div>
+                </thead>
+                <tbody>
+                {% for post in pagination.items %}
+                    <tr>
+                        <td>{{ post.id }}</td>
+                        <td>{{ post.createdAt|date('Y/m/d') }}</td>
+                        <td>{{ post.title }}</td>
+                        <td>
+                            <a href="{{ url('dashboard_show', {id: post.id}) }}">Zobacz</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+
+        {% else %}
+            <p>
+                Brak treści
+            </p>
+        {% endif %}
+
     {% endblock %}
