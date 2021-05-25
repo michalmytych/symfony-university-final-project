@@ -86,17 +86,21 @@ class PostController extends AbstractController
      *
      * @param Request $request
      * @param Post $post
+     * @param PostRepository $postRepository
      * @return Response
      *
-     * @Route("/{id}/edit", name="dashboard_edit", methods={"GET","POST"})
+     * @Route("/{id}/edit", name="dashboard_edit", methods={"GET","PUT"})
      */
     public function edit(Request $request, Post $post, PostRepository $postRepository): Response
     {
-        $form = $this->createForm(PostType::class, $post);
+        $form = $this->createForm(PostType::class, $post, ['method' => 'PUT']);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $postRepository->flushChanges();
+            // $post->setUpdatedAt() ...
+            // flashMessage
+            $postRepository->save($post);
+
             return $this->redirectToRoute('dashboard_index');
         }
 
@@ -111,6 +115,7 @@ class PostController extends AbstractController
      *
      * @param Request $request
      * @param Post $post
+     * @param PostRepository $postRepository
      * @return Response
      *
      * @todo - moze zmienic na metode delete?

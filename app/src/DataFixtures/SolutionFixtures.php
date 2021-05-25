@@ -17,9 +17,7 @@ class SolutionFixtures extends AbstractBaseFixtures
     {
         for ($i = 0; $i < self::FIXTURES_AMOUNT; ++$i) {
             $solution = new Solution();
-
             $solution->setSubmittedAt($this->faker->dateTimeBetween ('-100 days', '-1 days'));
-
             $this->manager->persist ($solution);
         }
 
