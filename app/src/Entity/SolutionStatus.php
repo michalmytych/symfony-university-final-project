@@ -11,6 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Represents current status of solution in the system.
  *
  * @ORM\Entity(repositoryClass=SolutionStatusRepository::class)
+ * @ORM\Table(name="solution_statuses")
  */
 class SolutionStatus
 {

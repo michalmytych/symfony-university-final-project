@@ -12,6 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Represents coding problem added by teacher-type user.
  *
  * @ORM\Entity(repositoryClass=ProblemRepository::class)
+ * @ORM\Table(name="problems")
  */
 class Problem
 {

@@ -10,6 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Represents grade provided by teacher-like user for specific coding problem solution.
  *
  * @ORM\Entity(repositoryClass=GradeRepository::class)
+ * @ORM\Table(name="grades")
  */
 class Grade
 {

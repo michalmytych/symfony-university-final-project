@@ -12,6 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Represents social network-like post added by user to specific course or group.
  *
  * @ORM\Entity(repositoryClass=PostRepository::class)
+ * @ORM\Table(name="posts")
  */
 class Post
 {

@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Represents coding language available for solutions.
  *
  * @ORM\Entity(repositoryClass=CodeLanguageRepository::class)
+ * @ORM\Table(name="code_languages")
  */
 class CodeLanguage
 {

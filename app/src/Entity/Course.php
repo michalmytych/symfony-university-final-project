@@ -13,6 +13,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  * and for which posts or problems are published.
  *
  * @ORM\Entity(repositoryClass=CourseRepository::class)
+ * @ORM\Table(name="courses")
  */
 class Course
 {

@@ -12,6 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Represents solution provided by user to specific problem.
  *
  * @ORM\Entity(repositoryClass=SolutionRepository::class)
+ * @ORM\Table(name="solutions")
  */
 class Solution
 {

@@ -12,7 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Represents group of users for which posts or problems are published.
  *
  * @ORM\Entity(repositoryClass=GroupRepository::class)
- * @ORM\Table(name="`group`")
+ * @ORM\Table(name="`groups`")
  */
 class Group
 {
