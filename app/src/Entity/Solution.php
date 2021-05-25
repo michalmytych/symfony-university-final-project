@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use App\Repository\SolutionRepository;
 use DateTimeInterface;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -59,6 +61,21 @@ class Solution
      * @ORM\JoinColumn(nullable=false)
      */
     private $status;
+
+    /**
+     * Past statuses of solution.
+     *
+     * @ORM\ManyToMany(targetEntity=SolutionStatus::class)
+     */
+    private $past_statuses;
+
+    /**
+     * Solution constructor.
+     */
+    public function __construct()
+    {
+        $this->past_statuses = new ArrayCollection();
+    }
 
     /**
      * Get unique solution identifier.
@@ -184,6 +201,44 @@ class Solution
          * @todo - limit possible values to specific statuses
          */
         $this->status = $status;
+
+        return $this;
+    }
+
+    /**
+     * Get past statuses of solution.
+     *
+     * @return Collection|SolutionStatus[]
+     */
+    public function getPastStatuses(): Collection
+    {
+        return $this->past_statuses;
+    }
+
+    /**
+     * Add past status to solution.
+     *
+     * @param SolutionStatus $pastStatus
+     * @return $this
+     */
+    public function addPastStatus(SolutionStatus $pastStatus): self
+    {
+        if (!$this->past_statuses->contains($pastStatus)) {
+            $this->past_statuses[] = $pastStatus;
+        }
+
+        return $this;
+    }
+
+    /**
+     * Remove past status from solution.
+     *
+     * @param SolutionStatus $pastStatus
+     * @return $this
+     */
+    public function removePastStatus(SolutionStatus $pastStatus): self
+    {
+        $this->past_statuses->removeElement($pastStatus);
 
         return $this;
     }
