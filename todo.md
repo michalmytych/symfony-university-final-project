@@ -2,6 +2,7 @@
 
 @ 1. Skończyć wszystkie encje (podstawowe pola)
 2. Dodać relacje do encji
+   * dodać past_statuses do solution 
 3. Dodać data fixtures do każdej encji
 4. Zbudować repozytoria dla każdej encji
 5. Zbudować kontrolery

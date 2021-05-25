@@ -7,3 +7,4 @@
 2. Dlaczego nie zadziałała mi nazwa pola encji, tylko nazwa
    kolumny w rekordzie bazy danych
     ``` ->orderBy('post.created_at', 'DESC');```
+3. Jak ograniczyć możliwe wartości ```$solution->status``` w setterze tego pola? 
