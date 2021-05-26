@@ -1,0 +1,47 @@
+1. DashboardController
+    + index()
+    + show()
+    + create()
+    + update()
+    + delete()
+    + searchByFields()    ?
+
+2. CourseController
+    + findAll()
+    + findOneById()
+    + create()
+    + update()
+    + delete()
+    + searchByFields()    ?
+
+3. GroupController
+    + findAll()
+    + findOneById()
+    + create()
+    + update()
+    + delete()
+    + searchByFields()    ?
+
+4. ProblemController
+    + findAll()
+    + findOneById()
+    + create()
+    + update()
+    + delete()
+    + searchByFields()    ?
+
+5. GradeController
+    + findAll()
+    + findOneById()
+    + create()
+    + update()
+    + delete()
+    + searchByFields()    ?
+
+6. SolutionController
+    + findAll()
+    + findOneById()
+    + create()
+    + update()
+    + delete()
+    + searchByFields()    ?

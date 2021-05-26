@@ -15,32 +15,22 @@ use Symfony\Component\Routing\Annotation\Route;
  * Post controller - on route /dashboard.
  * @Route("/dashboard")
  */
-class PostController extends AbstractController
+class _PostController extends AbstractController
 {
-    private PostRepository $postRepository;
-
-    /**
-     * PostController constructor.
-     * @param PostRepository $postRepository
-     */
-    public function __construct(PostRepository $postRepository)
-    {
-        $this->postRepository = $postRepository;
-    }
-
     /**
      * Index action.
      *
      * @param Request $request
+     * @param PostRepository $postRepository
      * @param PaginatorInterface $paginator
      * @return Response
      *
-     * @Route( "/", methods={"GET"}, name="dashboard_index")
+     * @Route( "/dashboard", methods={"GET"}, name="dashboard_index")
      */
-    public function index(Request $request, PaginatorInterface $paginator): Response
+    public function index(Request $request, PostRepository $postRepository, PaginatorInterface $paginator): Response
     {
         $pagination = $paginator->paginate(
-            $this->postRepository->queryAll(),
+            $postRepository->queryAll(),
             $request->query->getInt('page', 1),
             PostRepository::PAGINATOR_ITEMS_PER_PAGE
         );
@@ -54,18 +44,19 @@ class PostController extends AbstractController
      * Store new post
      *
      * @param Request $request
+     * @param PostRepository $postRepository
      * @return Response
      *
      * @Route("/new", name="dashboard_new", methods={"GET","POST"})
      */
-    public function store(Request $request): Response
+    public function store(Request $request, PostRepository $postRepository): Response
     {
         $post = new Post();
         $form = $this->createForm(PostType::class, $post);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->postRepository->save($post);
+            $postRepository->save($post);
             return $this->redirectToRoute('dashboard_index');
         }
 
@@ -81,7 +72,7 @@ class PostController extends AbstractController
      * @param Post $post
      * @return Response
      *
-     * @Route("/{id}", name="dashboard_show", methods={"GET"}, requirements={"id": "[1-9]\d"})
+     * @Route("/{id}", name="dashboard_show", methods={"GET"})
      */
     public function show(Post $post): Response
     {
@@ -95,11 +86,12 @@ class PostController extends AbstractController
      *
      * @param Request $request
      * @param Post $post
+     * @param PostRepository $postRepository
      * @return Response
      *
-     * @Route("/{id}/edit", name="dashboard_edit", methods={"GET","PUT"}, requirements={"id": "[1-9]\d"})
+     * @Route("/{id}/edit", name="dashboard_edit", methods={"GET","PUT"})
      */
-    public function edit(Request $request, Post $post): Response
+    public function edit(Request $request, Post $post, PostRepository $postRepository): Response
     {
         $form = $this->createForm(PostType::class, $post, ['method' => 'PUT']);
         $form->handleRequest($request);
@@ -107,7 +99,7 @@ class PostController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             // $post->setUpdatedAt() ...
             // flashMessage
-            $this->postRepository->save($post);
+            $postRepository->save($post);
 
             return $this->redirectToRoute('dashboard_index');
         }
@@ -123,16 +115,17 @@ class PostController extends AbstractController
      *
      * @param Request $request
      * @param Post $post
+     * @param PostRepository $postRepository
      * @return Response
      *
      * @todo - moze zmienic na metode delete?
      *
-     * @Route("/{id}", name="dashboard_delete", methods={"POST"}, requirements={"id": "[1-9]\d"})
+     * @Route("/{id}", name="dashboard_delete", methods={"POST"})
      */
-    public function delete(Request $request, Post $post): Response
+    public function delete(Request $request, Post $post, PostRepository $postRepository): Response
     {
         if ($this->isCsrfTokenValid('delete'.$post->getId(), $request->request->get('_token'))) {
-            $this->postRepository->destroy($post);
+            $postRepository->destroy($post);
         }
 
         return $this->redirectToRoute('dashboard_index');

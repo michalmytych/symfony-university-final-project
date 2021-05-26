@@ -20,6 +20,12 @@ class PostRepository extends ServiceEntityRepository
 
     private LoggerInterface $logger;
 
+    /**
+     * PostRepository constructor.
+     *
+     * @param ManagerRegistry $registry
+     * @param LoggerInterface $logger
+     */
     public function __construct(ManagerRegistry $registry, LoggerInterface $logger)
     {
         parent::__construct($registry, Post::class);
@@ -100,11 +106,11 @@ class PostRepository extends ServiceEntityRepository
     /**
      * Get or create new query builder.
      *
+     * @param QueryBuilder|null $queryBuilder
      * @return QueryBuilder Query builder
      */
-    private function getOrCreateQueryBuilder(): QueryBuilder
+    private function getOrCreateQueryBuilder(QueryBuilder $queryBuilder = null): QueryBuilder
     {
-        $queryBuilder = null;
-        return null ?? $this->createQueryBuilder('post');
+        return $queryBuilder ?? $this->createQueryBuilder('post');
     }
 }
