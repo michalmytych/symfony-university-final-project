@@ -8,3 +8,4 @@
    kolumny w rekordzie bazy danych
     ``` ->orderBy('post.created_at', 'DESC');```
 3. Jak ograniczyć możliwe wartości ```$solution->status``` w setterze tego pola? 
+4. Jak dodać relacje z innymi obiektami w fixtures - patrz SolutionFixtures 

@@ -27,7 +27,7 @@ class SolutionStatus
     /**
      * Informational string code of status.
      *
-     * @ORM\Column(type="string", length=16)
+     * @ORM\Column(type="string", length=64)
      *
      * @todo - limit possible values to specific statuses
      */
