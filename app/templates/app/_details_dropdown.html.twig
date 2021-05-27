@@ -1,0 +1,13 @@
+<li class="nav-item dropdown" style="display: inline-block; width: fit-content;">
+    <a
+            class="nav-link dropdown-toggle"
+            data-bs-toggle="dropdown"
+            href="#"
+            role="button"
+            aria-expanded="false">{{ label }}</a>
+    <ul class="dropdown-menu">
+        {% for item in items %}
+            <li><a class="dropdown-item" href="#">{{ item.name }}</a></li>
+        {% endfor %}
+    </ul>
+</li>

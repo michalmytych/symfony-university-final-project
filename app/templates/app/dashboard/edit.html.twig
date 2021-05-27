@@ -3,13 +3,25 @@
 {% block title %}Edit post{% endblock %}
 
 {% block body %}
-    <h1>Edit post</h1>
 
-    {{ include('app/_form.html.twig', {'button_label': 'Update'}) }}
+    <section class="container">
+        <div class="card" style="margin-bottom: 2rem; margin-top: 2rem">
+            <div class="card-header">
+                <a href="{{ path('dashboard_index') }}">Back to list</a>
+            </div>
+        </div>
 
-    <a href="{{ path('dashboard_index') }}">Back to list</a>
+        <div class="card" style="margin-bottom: 2rem; margin-top: 2rem">
+            <div class="card-header">
+                <h3>Edit post</h3>
+            </div>
+            <div>
+                {{ include('app/_form.html.twig', {'button_label': 'Update'}) }}
+            </div>
+            {{ include('app/_delete_form.html.twig', {
+                'item_id': post.id,
+            })}}
+        </div>
+    </section>
 
-    {{ include('app/_delete_form.html.twig', {
-        'item_id': post.id,
-    }) }}
 {% endblock %}

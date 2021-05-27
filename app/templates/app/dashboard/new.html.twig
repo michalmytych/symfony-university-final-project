@@ -3,9 +3,21 @@
 {% block title %}New post{% endblock %}
 
 {% block body %}
-    <h1>Create new post</h1>
+<section class="container">
+    <div class="card" style="margin-bottom: 2rem; margin-top: 2rem">
+        <div class="card-header">
+            <a href="{{ path('dashboard_index') }}">Back to list</a>
+        </div>
+    </div>
 
-    {{ include('app/_form.html.twig') }}
+    <div class="card" style="margin-bottom: 2rem; margin-top: 2rem">
+        <div class="card-header">
+            <h3>Create new post</h3>
+        </div>
+        <div>
+            {{ include('app/_form.html.twig') }}
+        </div>
+    </div>
 
-    <a href="{{ path('dashboard_index') }}">back to list</a>
+</section>
 {% endblock %}

@@ -3,23 +3,37 @@
 {% block title %}Post{% endblock %}
 
 {% block body %}
-    <table class="table">
-        <tbody>
-        <tr>
-            <td><h3>{{ post.title }}</h3></td>
-        </tr>
-        <hr>
-        <tr>
-            <td><p>{{ post.text_content ?? 'Brak treści'}}</p></td>
-        </tr>
-        </tbody>
-    </table>
+    <section class="container">
+        <div class="card" style="margin-bottom: 2rem; margin-top: 2rem">
+            <div class="card-header">
+                <a href="{{ path('dashboard_index') }}">Back to list</a>
+            </div>
+        </div>
 
-    <a href="{{ path('dashboard_index') }}">Back to list</a>
+        <div class="card">
+            <div class="card-header">
+                <p class="card-subtitle mb-2 text-muted" style="margin-top: 0.5rem">Published {{ post.createdAt|date("m.d.Y") }}</p>
+            </div>
+            <div class="card-body">
+                <h4 class="card-title">{{ post.title }}</h4>
+                <p class="card-text">{{ post.textContent }}</p>
+                <a href="{{ path('dashboard_edit', {'id': post.id}) }}">
+                    <button class="btn btn-success">Edit</button>
+                </a>
+                {{ include('app/_delete_form.html.twig', {
+                    'item_id': post.id,
+                }) }}
+                {{ include('app/_details_dropdown.html.twig', {
+                    'items': post.courses,
+                    'label': 'Courses'
+                }) }}
+                {{ include('app/_details_dropdown.html.twig', {
+                    'items': post.groups,
+                    'label': 'Groups'
+                }) }}
+            </div>
+        </div>
+    </section>
 
-    <a href="{{ path('dashboard_edit', {'id': post.id}) }}">Edit</a>
 
-    {{ include('app/_delete_form.html.twig', {
-        'item_id': post.id,
-    }) }}
 {% endblock %}
