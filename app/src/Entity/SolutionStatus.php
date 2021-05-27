@@ -16,6 +16,26 @@ use Doctrine\ORM\Mapping as ORM;
 class SolutionStatus
 {
     /**
+     * Default statuses that solution can have.
+     *
+     * @const DEFAULT_SOLUTION_STATUSES
+     */
+    public const DEFAULT_SOLUTION_STATUSES = [
+        'RECEIVED',
+        'SAVING_TO_DATABASE',
+        'SAVED_TO_DATABASE',
+        'SENDING',
+        'SENT',
+        'CHECKING',
+        'REJECTED',
+        'ACCEPTED',
+        'CHECKING_LIMITS',
+        'FILE_SIZE_LIMIT_EXCEEDED',
+        'MEMORY_LIMIT_EXCEEDED',
+        'EXECUTION_TIME_LIMIT_EXCEEDED',
+    ];
+
+    /**
      * Unique solution status identifier.
      *
      * @ORM\Id
@@ -70,6 +90,8 @@ class SolutionStatus
 
     /**
      * Set solution status name.
+     *
+     * @todo - dodac sprawdzanie czy status zawiera się w self::DEFAULT_SOLUTION_STATUSES i ew rzucic jakis wyjatek
      *
      * @param string $status
      * @return $this

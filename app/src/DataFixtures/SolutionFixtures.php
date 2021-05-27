@@ -30,25 +30,32 @@ class SolutionFixtures extends AbstractBaseFixtures implements DependentFixtureI
      */
     public function loadData(ObjectManager $manager): void
     {
-        for ($i = 0; $i < self::FIXTURES_AMOUNT; ++$i) {
-            /**
-             * @todo - jak dodac randomowy rekord z innej tabeli inaczej niz w ten sposob:
-             */
+        $this->createMany(10, 'codeLanguages', function($i) {
             // Create random CodeLanguage to fill solutions.code_language column
             $codeLanguage = new CodeLanguage();
             $codeLanguage->setJdoodleCode('random_code');
             $codeLanguage->setName('random_name');
-            $this->manager->persist($codeLanguage);
 
+            return $codeLanguage;
+        });
+
+        $this->createMany(10, 'solutionStatuses', function($i) {
             // Create random SolutionStatus to fill solutions.status column
+            /**
+             * @todo - jak odnieść się referencją do już istniejących statusów, nie robiąc nowych
+             */
             $solutionStatus = new SolutionStatus();
-            $solutionStatus->setStatus('RECEIVED');
+            $solutionStatus->setStatus($this->faker->randomElement(SolutionStatus::DEFAULT_SOLUTION_STATUSES));
             $this->manager->persist($solutionStatus);
 
+            return $solutionStatus;
+        });
+
+        for ($i = 0; $i < self::FIXTURES_AMOUNT; ++$i) {
             $solution = new Solution();
             $solution->setSubmittedAt($this->faker->dateTimeBetween('-100 days', '-1 days'));
-            $solution->setCodeLanguage($codeLanguage);
-            $solution->setStatus($solutionStatus);
+            $solution->setCodeLanguage($this->getRandomReference('codeLanguages'));
+            $solution->setStatus($this->getRandomReference('solutionStatuses'));
 
             $this->manager->persist($solution);
         }
