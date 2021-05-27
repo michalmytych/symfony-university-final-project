@@ -1,4 +1,6 @@
-#SYSTEM AUTOMATYCZNEGO SPRAWDZANIA ZADAŃ ALGORYTMICZNYCH
+#System automatycznego sprawdzania zadań algorytmicznych
+___
+
 ### Opis funkcjonalności
 Aplikacja pozwala na tworzenie kont typu Nauczyciel lub typu Student w systemie.
 Użytkownik o roli nauczyciela może tworzyć kursy oraz powiązane z nimi grupy
