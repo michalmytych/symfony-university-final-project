@@ -7,6 +7,7 @@ use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Represents social network-like post added by user to specific course or group.
@@ -43,13 +44,15 @@ class Post
      * Title of post.
      *
      * @ORM\Column(type="string", length=128)
+     * @Assert\Type(type="string")
+     * @Assert\Length(min="3", max="128")
      */
     private $title;
 
     /**
      * Courses related to post.
      *
-     * @ORM\ManyToMany(targetEntity=Course::class, mappedBy="posts")
+     * @ORM\ManyToMany(targetEntity=Course::class, mappedBy="posts", fetch="EXTRA_LAZY")
      */
     private $courses;
 
