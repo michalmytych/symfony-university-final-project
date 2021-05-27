@@ -56,3 +56,8 @@
 /.web-server-pid
 /app/src/Controller/WowController.php
 /app/src/Repository/WowRepository.php
+
+# To-do list & questions file
+todo.md
+pytania.md
+todo_controllery.txt
