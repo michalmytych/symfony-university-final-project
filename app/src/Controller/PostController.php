@@ -65,7 +65,14 @@ class PostController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $post->setCreatedAt(new \DateTime());
             $this->postRepository->save($post);
+
+            /**
+             * @todo - dodac flasha tam gdzie trzeba
+             */
+            $this->addFlash('success', 'message_created_successfully');
+
             return $this->redirectToRoute('dashboard_index');
         }
 

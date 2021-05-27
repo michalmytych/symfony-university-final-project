@@ -13,6 +13,9 @@
 10. Zbudować JdoodleService
 11. Dodać ostatnie pola do encji
 12. Zintegrować JdoodleService z kontrolerami
+13. Uzupełnić validacje @Assert\Type itd w encjach, @Assert/NotBLank
+14. Co robi fetch="EXTRA_LAZY" w encjach)
+15. 
 
 ## Dodatkowe
 1. Skopiować z SolutionsFixtures wypełnianie relacji referencjami do fixtur innych encji
