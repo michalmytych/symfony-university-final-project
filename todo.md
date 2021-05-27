@@ -13,3 +13,13 @@
 10. Zbudować JdoodleService
 11. Dodać ostatnie pola do encji
 12. Zintegrować JdoodleService z kontrolerami
+
+## Dodatkowe
+1. Skopiować z SolutionsFixtures wypełnianie relacji referencjami do fixtur innych encji
+2. Napisać web-scrapingowy skrypt w pythonie pobierający z Jdoodle
+listę wszystkich języków i ich kodów, uruchamiany z kontrolera CodeLanguageController
+w którym będzie wywoływany CodeLanguageRepository, który z kolei wprowadzi
+języki i ich kody do tabeli code_languages. W razie zmiany struktury tabeli na
+jdoodle skrypt musi o tym poinformować. Najlepiej jakby dało się wywołać tą 
+funkcję z panelu admina.
+   
