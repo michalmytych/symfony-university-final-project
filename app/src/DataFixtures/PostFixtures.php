@@ -17,7 +17,7 @@ class PostFixtures extends AbstractBaseFixtures
      */
     public function loadData(ObjectManager $manager): void
     {
-        $this->createMany(10, 'courses', function($i) {
+        $this->createMany(10, 'coursesForPosts', function($i) {
             $course = new Course();
             $course->setName($this->faker->sentence(1));
             $course->setDescription($this->faker->text(64));
@@ -26,7 +26,7 @@ class PostFixtures extends AbstractBaseFixtures
             return $course;
         });
 
-        $this->createMany(10, 'groups', function($i) {
+        $this->createMany(10, 'groupsForPosts', function($i) {
             $group = new Group();
             $group->setName($this->faker->sentence(1));
             $group->setDescription($this->faker->text(64));
@@ -41,8 +41,8 @@ class PostFixtures extends AbstractBaseFixtures
             $post->setTitle($this->faker->sentence);
             $post->setTextContent($this->faker->sentence);
             $post->setCreatedAt($this->faker->dateTimeBetween ('-100 days', '-1 days'));
-            $post->addCourse($this->getRandomReference('courses'));
-            $post->addGroup($this->getRandomReference('groups'));
+            $post->addCourse($this->getRandomReference('coursesForPosts'));
+            $post->addGroup($this->getRandomReference('groupsForPosts'));
 
             $this->manager->persist($post);
         }

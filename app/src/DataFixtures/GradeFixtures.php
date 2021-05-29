@@ -3,6 +3,7 @@
 namespace App\DataFixtures;
 
 use App\Entity\Grade;
+use App\Entity\Solution;
 use Doctrine\Persistence\ObjectManager;
 
 class GradeFixtures extends AbstractBaseFixtures

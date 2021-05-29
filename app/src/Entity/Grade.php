@@ -171,7 +171,7 @@ class Grade
     }
 
     /**
-     * Get solution to which grade is related.
+     * Set solution to which grade is related.
      *
      * @param Solution|null $solution
      * @return $this
