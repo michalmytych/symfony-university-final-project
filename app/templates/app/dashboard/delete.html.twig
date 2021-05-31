@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Delete post{% endblock %}
+
+{% block body %}
+    <section class="container">
+        <div class="card" style="margin-bottom: 2rem; margin-top: 2rem">
+            <div class="card-header">
+                <a href="{{ path('dashboard_index') }}">Back to list</a>
+            </div>
+        </div>
+
+        <div class="card" style="margin-bottom: 2rem; margin-top: 2rem">
+            <div class="card-header">
+                <h3>Delete post</h3>
+            </div>
+            <div>
+                {{ form_start(form, {method: 'DELETE', action: url('dashboard_delete', {id: post.id})}) }}
+                <div style="padding: 1rem;">
+                    {{ form_widget(form) }}
+                    <p>Czy napewno chcesz usunac?</p>
+                    <div class="form-group row float-sm-right">
+                        <input type="submit" value="{{ 'action_delete'|trans }}" class="btn btn-primary" />
+                    </div>
+                </div>
+                {{ form_end(form) }}
+            </div>
+        </div>
+
+    </section>
+{% endblock %}

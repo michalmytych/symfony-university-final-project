@@ -15,7 +15,16 @@
             <h3>Create new post</h3>
         </div>
         <div>
-            {{ include('app/_form.html.twig') }}
+            {{ form_start(form, {method: 'POST', action: url('dashboard_create')}) }}
+            <div style="padding: 1rem;">
+                {{ form_widget(form) }}
+                <hr>
+                <button
+                        class="btn btn-primary"
+                        style="display: inline-block; width: fit-content;"
+                >{{ button_label|default('Save') }}</button>
+            </div>
+            {{ form_end(form) }}
         </div>
     </div>
 
