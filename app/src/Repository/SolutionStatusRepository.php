@@ -4,13 +4,13 @@ namespace App\Repository;
 
 use App\Entity\SolutionStatus;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @method SolutionStatus|null find($id, $lockMode = null, $lockVersion = null)
- * @method SolutionStatus|null findOneBy(array $criteria, array $orderBy = null)
- * @method SolutionStatus[]    findAll()
- * @method SolutionStatus[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * Class SolutionStatusRepository
+ *
+ * @package App\Repository
  */
 class SolutionStatusRepository extends ServiceEntityRepository
 {
@@ -19,32 +19,24 @@ class SolutionStatusRepository extends ServiceEntityRepository
         parent::__construct($registry, SolutionStatus::class);
     }
 
-    // /**
-    //  * @return SolutionStatus[] Returns an array of SolutionStatus objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    /**
+     * Query all records.
+     *
+     * @return QueryBuilder Query builder
+     */
+    public function queryAll(): QueryBuilder
     {
-        return $this->createQueryBuilder('s')
-            ->andWhere('s.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('s.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
+        return $this->getOrCreateQueryBuilder();
     }
-    */
 
-    /*
-    public function findOneBySomeField($value): ?SolutionStatus
+    /**
+     * Get or create new query builder.
+     *
+     * @param QueryBuilder|null $queryBuilder
+     * @return QueryBuilder Query builder
+     */
+    private function getOrCreateQueryBuilder(QueryBuilder $queryBuilder = null): QueryBuilder
     {
-        return $this->createQueryBuilder('s')
-            ->andWhere('s.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        return $queryBuilder ?? $this->createQueryBuilder('post');
     }
-    */
 }
