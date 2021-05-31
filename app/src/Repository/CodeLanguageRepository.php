@@ -5,46 +5,53 @@ namespace App\Repository;
 use App\Entity\CodeLanguage;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Exception;
+use Psr\Log\LoggerInterface;
 
 /**
- * @method CodeLanguage|null find($id, $lockMode = null, $lockVersion = null)
- * @method CodeLanguage|null findOneBy(array $criteria, array $orderBy = null)
- * @method CodeLanguage[]    findAll()
- * @method CodeLanguage[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * Class CodeLanguageRepository
+ *
+ * @package App\Repository
  */
 class CodeLanguageRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
+    private LoggerInterface $logger;
+
+    public function __construct(ManagerRegistry $registry, LoggerInterface $logger)
     {
         parent::__construct($registry, CodeLanguage::class);
+        $this->logger = $logger;
     }
 
-    // /**
-    //  * @return CodeLanguage[] Returns an array of CodeLanguage objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    /**
+     * Method for saving list of coding languages
+     * which are currently available at Jdoodle
+     * external service.
+     *
+     * @param CodeLanguage $codeLanguage
+     */
+    public function saveMultiple(CodeLanguage $codeLanguage) : void
     {
-        return $this->createQueryBuilder('c')
-            ->andWhere('c.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('c.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
+        /**
+         * Metoda repozytorium wywoływana z controllera dla ednpointa API Json
+         *
+         * @todo - dobre praktyki co do tego jak zapisywać w bazie wiele encji naraz (foreach, gdze obsluga bledow?, czy z transakcją?)
+         */
     }
-    */
 
-    /*
-    public function findOneBySomeField($value): ?CodeLanguage
+    /**
+     * Method for updating list of coding languages
+     * which are currently available at Jdoodle
+     * external service.
+     *
+     * @param CodeLanguage $codeLanguage
+     */
+    public function updateMultiple(CodeLanguage $codeLanguage) : void
     {
-        return $this->createQueryBuilder('c')
-            ->andWhere('c.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        /**
+         * Metoda repozytorium wywoływana z controllera dla ednpointa API Json
+         *
+         * @todo - trzeba porownac poprzedni stan tabeli, zeby poinformowac admina o ewentualnych zmianach w konfiguracji języków
+         */
     }
-    */
 }
