@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20210525132455 extends AbstractMigration
+final class Version20210531185836 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -27,11 +27,11 @@ final class Version20210525132455 extends AbstractMigration
         $this->addSql('CREATE TABLE grades (id INT AUTO_INCREMENT NOT NULL, comment VARCHAR(128) DEFAULT NULL, final_score NUMERIC(3, 2) DEFAULT NULL, created_at DATETIME DEFAULT NULL, auto_score NUMERIC(3, 2) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE `groups` (id INT AUTO_INCREMENT NOT NULL, name VARCHAR(64) NOT NULL, description LONGTEXT NOT NULL, created_at DATETIME NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE group_post (group_id INT NOT NULL, post_id INT NOT NULL, INDEX IDX_73D037FDFE54D947 (group_id), INDEX IDX_73D037FD4B89032C (post_id), PRIMARY KEY(group_id, post_id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
-        $this->addSql('CREATE TABLE posts (id INT AUTO_INCREMENT NOT NULL, text_content VARCHAR(512) NOT NULL, created_at DATETIME NOT NULL, title VARCHAR(128) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE posts (id INT AUTO_INCREMENT NOT NULL, text_content VARCHAR(512) NOT NULL, created_at DATETIME NOT NULL, title VARCHAR(128) NOT NULL, changed_at DATETIME NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE problems (id INT AUTO_INCREMENT NOT NULL, created_at DATETIME NOT NULL, description LONGTEXT NOT NULL, tests JSON NOT NULL, title VARCHAR(128) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE problem_code_language (problem_id INT NOT NULL, code_language_id INT NOT NULL, INDEX IDX_EEAD558DA0DCED86 (problem_id), INDEX IDX_EEAD558DCBB05344 (code_language_id), PRIMARY KEY(problem_id, code_language_id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE problem_group (problem_id INT NOT NULL, group_id INT NOT NULL, INDEX IDX_F5C86B6EA0DCED86 (problem_id), INDEX IDX_F5C86B6EFE54D947 (group_id), PRIMARY KEY(problem_id, group_id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
-        $this->addSql('CREATE TABLE solution_statuses (id INT AUTO_INCREMENT NOT NULL, status VARCHAR(16) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE solution_statuses (id INT AUTO_INCREMENT NOT NULL, status VARCHAR(64) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE solutions (id INT AUTO_INCREMENT NOT NULL, problem_id INT DEFAULT NULL, grade_id INT DEFAULT NULL, code_language_id INT NOT NULL, status_id INT NOT NULL, submitted_at DATETIME NOT NULL, INDEX IDX_A90F77EA0DCED86 (problem_id), UNIQUE INDEX UNIQ_A90F77EFE19A1A8 (grade_id), INDEX IDX_A90F77ECBB05344 (code_language_id), INDEX IDX_A90F77E6BF700BD (status_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE solution_solution_status (solution_id INT NOT NULL, solution_status_id INT NOT NULL, INDEX IDX_A14F45DD1C0BE183 (solution_id), INDEX IDX_A14F45DDBD0AB3AD (solution_status_id), PRIMARY KEY(solution_id, solution_status_id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE wow (id INT AUTO_INCREMENT NOT NULL, name VARCHAR(128) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');

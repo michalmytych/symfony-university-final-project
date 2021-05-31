@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * Represents social network-like post added by user to specific course or group.
@@ -31,14 +32,15 @@ class Post
      *
      * @ORM\Column(type="string", length=512)
      */
-    private $text_content;
+    private $textContent;
 
     /**
      * Datetime when post was created.
      *
      * @ORM\Column(type="datetime")
+     * @Gedmo\Timestampable(on="create")
      */
-    private $created_at;
+    private $createdAt;
 
     /**
      * Title of post.
@@ -64,11 +66,18 @@ class Post
     private $groups;
 
     /**
+     * Datetime when title or textContent field were changed.
+     *
+     * @ORM\Column(type="datetime")
+     * @Gedmo\Timestampable(on="change", field={"title", "textContent"})
+     */
+    private $changedAt;
+
+    /**
      * Post constructor.
      */
     public function __construct()
     {
-        $this->created_at = new \DateTime();
         $this->courses = new ArrayCollection();
         $this->groups = new ArrayCollection();
     }
@@ -90,18 +99,18 @@ class Post
      */
     public function getTextContent(): ?string
     {
-        return $this->text_content;
+        return $this->textContent;
     }
 
     /**
      * Set text content of post.
      *
-     * @param string $text_content
+     * @param string $textContent
      * @return $this
      */
-    public function setTextContent(string $text_content): self
+    public function setTextContent(string $textContent): self
     {
-        $this->text_content = $text_content;
+        $this->textContent = $textContent;
 
         return $this;
     }
@@ -113,18 +122,41 @@ class Post
      */
     public function getCreatedAt(): ?DateTimeInterface
     {
-        return $this->created_at;
+        return $this->createdAt;
     }
 
     /**
      * Set datetime when post was created.
      *
-     * @param DateTimeInterface $created_at
+     * @param DateTimeInterface $createdAt
      * @return $this
      */
-    public function setCreatedAt(DateTimeInterface $created_at): self
+    public function setCreatedAt(DateTimeInterface $createdAt): self
     {
-        $this->created_at = $created_at;
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * Get datetime when title or textContent field were changed.
+     *
+     * @return DateTimeInterface|null
+     */
+    public function getChangedAt(): ?\DateTimeInterface
+    {
+        return $this->changedAt;
+    }
+
+    /**
+     * Set datetime when title or textContent field were changed.
+     *
+     * @param DateTimeInterface $changedAt
+     * @return $this
+     */
+    public function setChangedAt(\DateTimeInterface $changedAt): self
+    {
+        $this->changedAt = $changedAt;
 
         return $this;
     }

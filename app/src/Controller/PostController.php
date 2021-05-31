@@ -7,6 +7,7 @@ use App\Form\PostType;
 use App\Repository\PostRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -17,10 +18,16 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class PostController extends AbstractController
 {
+    /**
+     * Repository for querying database.
+     *
+     * @var PostRepository
+     */
     private PostRepository $postRepository;
 
     /**
      * PostController constructor.
+     *
      * @param PostRepository $postRepository
      */
     public function __construct(PostRepository $postRepository)
@@ -35,7 +42,11 @@ class PostController extends AbstractController
      * @param PaginatorInterface $paginator
      * @return Response
      *
-     * @Route( "/", methods={"GET"}, name="dashboard_index")
+     * @Route(
+     *     "/",
+     *     methods={"GET"},
+     *     name="dashboard_index"
+     * )
      */
     public function index(Request $request, PaginatorInterface $paginator): Response
     {
@@ -56,7 +67,11 @@ class PostController extends AbstractController
      * @param Request $request
      * @return Response
      *
-     * @Route("/create", name="dashboard_create", methods={"GET","POST"})
+     * @Route(
+     *     "/create",
+     *     methods={"GET","POST"},
+     *     name="dashboard_create",
+     * )
      */
     public function create(Request $request): Response
     {
@@ -65,11 +80,6 @@ class PostController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            /**
-             * @todo - tu bedzie validacja danych
-             * @todo - updatowanie createdAt i updatedAt powinno odbywać się w serwisach
-             */
-            $post->setCreatedAt(new \DateTime());
             $this->postRepository->save($post);
 
             /**
@@ -92,7 +102,12 @@ class PostController extends AbstractController
      * @param Post $post
      * @return Response
      *
-     * @Route("/{id}", name="dashboard_show", methods={"GET"}, requirements={"id": "[1-9]\d"})
+     * @Route(
+     *     "/{id}",
+     *     methods={"GET"},
+     *     requirements={"id": "[1-9]\d"},
+     *     name="dashboard_show"
+     * )
      */
     public function show(Post $post): Response
     {
@@ -108,7 +123,12 @@ class PostController extends AbstractController
      * @param Post $post
      * @return Response
      *
-     * @Route("/{id}/edit", name="dashboard_edit", methods={"GET","PUT"}, requirements={"id": "[1-9]\d"})
+     * @Route(
+     *     "/{id}/edit",
+     *     methods={"GET","PUT"},
+     *     requirements={"id": "[1-9]\d"},
+     *     name="dashboard_edit"
+     * )
      */
     public function edit(Request $request, Post $post): Response
     {
@@ -145,7 +165,7 @@ class PostController extends AbstractController
      */
     public function delete(Request $request, Post $post): Response
     {
-        $form = $this->createForm(PostType::class, $post, ['method' => 'DELETE']);
+        $form = $this->createForm(FormType::class, $post, ['method' => 'DELETE']);
         $form->handleRequest($request);
 
         if ($request->isMethod('DELETE') && !$form->isSubmitted()) {

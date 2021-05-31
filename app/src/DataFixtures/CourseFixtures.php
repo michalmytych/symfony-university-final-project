@@ -21,7 +21,9 @@ class CourseFixtures extends AbstractBaseFixtures
             $post = new Post();
             $post->setTitle($this->faker->sentence(1));
             $post->setTextContent($this->faker->text(64));
-            $post->setCreatedAt($this->faker->dateTimeBetween ('-100 days', '-1 days'));
+            $randomDatetime = $this->faker->dateTimeBetween('-100 days', '-1 days');
+            $post->setCreatedAt($randomDatetime);
+            $post->setChangedAt($randomDatetime);
 
             return $post;
         });

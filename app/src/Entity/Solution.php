@@ -30,7 +30,7 @@ class Solution
      *
      * @ORM\Column(type="datetime")
      */
-    private $submitted_at;
+    private $submittedAt;
 
     /**
      * Problem to which solution was provided.
@@ -53,7 +53,7 @@ class Solution
      * @ORM\ManyToOne(targetEntity=CodeLanguage::class)
      * @ORM\JoinColumn(nullable=false)
      */
-    private $code_language;
+    private $codeLanguage;
 
     /**
      * Current status of solution in the system.
@@ -68,14 +68,14 @@ class Solution
      *
      * @ORM\ManyToMany(targetEntity=SolutionStatus::class)
      */
-    private $past_statuses;
+    private $pastStatuses;
 
     /**
      * Solution constructor.
      */
     public function __construct()
     {
-        $this->past_statuses = new ArrayCollection();
+        $this->pastStatuses = new ArrayCollection();
     }
 
     /**
@@ -95,18 +95,18 @@ class Solution
      */
     public function getSubmittedAt(): ?DateTimeInterface
     {
-        return $this->submitted_at;
+        return $this->submittedAt;
     }
 
     /**
      * Set datetime when solution was submitted and saved in the system.
      *
-     * @param DateTimeInterface $submitted_at
+     * @param DateTimeInterface $submittedAt
      * @return $this
      */
-    public function setSubmittedAt(DateTimeInterface $submitted_at): self
+    public function setSubmittedAt(DateTimeInterface $submittedAt): self
     {
-        $this->submitted_at = $submitted_at;
+        $this->submittedAt = $submittedAt;
 
         return $this;
     }
@@ -164,18 +164,18 @@ class Solution
      */
     public function getCodeLanguage(): ?CodeLanguage
     {
-        return $this->code_language;
+        return $this->codeLanguage;
     }
 
     /**
      * Set coding language related to solution (language which was chosen in solution).
      *
-     * @param CodeLanguage|null $code_language
+     * @param CodeLanguage|null $codeLanguage
      * @return $this
      */
-    public function setCodeLanguage(?CodeLanguage $code_language): self
+    public function setCodeLanguage(?CodeLanguage $codeLanguage): self
     {
-        $this->code_language = $code_language;
+        $this->codeLanguage = $codeLanguage;
 
         return $this;
     }
@@ -213,7 +213,7 @@ class Solution
      */
     public function getPastStatuses(): Collection
     {
-        return $this->past_statuses;
+        return $this->pastStatuses;
     }
 
     /**
@@ -224,8 +224,8 @@ class Solution
      */
     public function addPastStatus(SolutionStatus $pastStatus): self
     {
-        if (!$this->past_statuses->contains($pastStatus)) {
-            $this->past_statuses[] = $pastStatus;
+        if (!$this->pastStatuses->contains($pastStatus)) {
+            $this->pastStatuses[] = $pastStatus;
         }
 
         return $this;
@@ -239,7 +239,7 @@ class Solution
      */
     public function removePastStatus(SolutionStatus $pastStatus): self
     {
-        $this->past_statuses->removeElement($pastStatus);
+        $this->pastStatuses->removeElement($pastStatus);
 
         return $this;
     }

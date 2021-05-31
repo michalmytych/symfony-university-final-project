@@ -34,7 +34,7 @@ class CodeLanguage
      *
      * @ORM\Column(type="string", length=16)
      */
-    private $jdoodle_code;
+    private $jdoodleCode;
 
     /**
      * Get identifier of coding language.
@@ -76,18 +76,18 @@ class CodeLanguage
      */
     public function getJdoodleCode(): ?string
     {
-        return $this->jdoodle_code;
+        return $this->jdoodleCode;
     }
 
     /**
      * Set code of language available at Jdoodle.
      *
-     * @param string $jdoodle_code
+     * @param string $jdoodleCode
      * @return $this
      */
-    public function setJdoodleCode(string $jdoodle_code): self
+    public function setJdoodleCode(string $jdoodleCode): self
     {
-        $this->jdoodle_code = $jdoodle_code;
+        $this->jdoodleCode = $jdoodleCode;
 
         return $this;
     }

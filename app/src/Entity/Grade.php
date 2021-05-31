@@ -35,21 +35,21 @@ class Grade
      *
      * @ORM\Column(type="decimal", precision=3, scale=2, nullable=true)
      */
-    private $final_score;
+    private $finalScore;
 
     /**
      * Datetime when grade was created.
      *
      * @ORM\Column(type="datetime", nullable=true)
      */
-    private $created_at;
+    private $createdAt;
 
     /**
      * Automatically added score, when none is provided.
      *
      * @ORM\Column(type="decimal", precision=3, scale=2)
      */
-    private $auto_score;
+    private $autoScore;
 
     /**
      * Solution to which grade is related.
@@ -98,18 +98,18 @@ class Grade
      */
     public function getFinalScore(): ?string
     {
-        return $this->final_score;
+        return $this->finalScore;
     }
 
     /**
      * Set grade final score.
      *
-     * @param string|null $final_score
+     * @param string|null $finalScore
      * @return $this
      */
-    public function setFinalScore(?string $final_score): self
+    public function setFinalScore(?string $finalScore): self
     {
-        $this->final_score = $final_score;
+        $this->finalScore = $finalScore;
 
         return $this;
     }
@@ -121,18 +121,18 @@ class Grade
      */
     public function getCreatedAt(): ?DateTimeInterface
     {
-        return $this->created_at;
+        return $this->createdAt;
     }
 
     /**
      * Set datetime when grade was created.
      *
-     * @param DateTimeInterface|null $created_at
+     * @param DateTimeInterface|null $createdAt
      * @return $this
      */
-    public function setCreatedAt(?DateTimeInterface $created_at): self
+    public function setCreatedAt(?DateTimeInterface $createdAt): self
     {
-        $this->created_at = $created_at;
+        $this->createdAt = $createdAt;
 
         return $this;
     }
@@ -144,18 +144,18 @@ class Grade
      */
     public function getAutoScore(): ?string
     {
-        return $this->auto_score;
+        return $this->autoScore;
     }
 
     /**
      * Set grade auto score.
      *
-     * @param string $auto_score
+     * @param string $autoScore
      * @return $this
      */
-    public function setAutoScore(string $auto_score): self
+    public function setAutoScore(string $autoScore): self
     {
-        $this->auto_score = $auto_score;
+        $this->autoScore = $autoScore;
 
         return $this;
     }

@@ -30,7 +30,7 @@ class Problem
      *
      * @ORM\Column(type="datetime")
      */
-    private $created_at;
+    private $createdAt;
 
     /**
      * Description of problem.
@@ -58,7 +58,7 @@ class Problem
      *
      * @ORM\ManyToMany(targetEntity=CodeLanguage::class)
      */
-    private $code_languages;
+    private $codeLanguages;
 
     /**
      * Solutions of problem provided by users.
@@ -79,7 +79,7 @@ class Problem
      */
     public function __construct()
     {
-        $this->code_languages = new ArrayCollection();
+        $this->codeLanguages = new ArrayCollection();
         $this->solutions = new ArrayCollection();
         $this->groups = new ArrayCollection();
     }
@@ -101,18 +101,18 @@ class Problem
      */
     public function getCreatedAt(): ?DateTimeInterface
     {
-        return $this->created_at;
+        return $this->createdAt;
     }
 
     /**
      * Set datetime when problem was created.
      *
-     * @param DateTimeInterface $created_at
+     * @param DateTimeInterface $createdAt
      * @return $this
      */
-    public function setCreatedAt(DateTimeInterface $created_at): self
+    public function setCreatedAt(DateTimeInterface $createdAt): self
     {
-        $this->created_at = $created_at;
+        $this->createdAt = $createdAt;
 
         return $this;
     }
@@ -193,7 +193,7 @@ class Problem
      */
     public function getCodeLanguages(): Collection
     {
-        return $this->code_languages;
+        return $this->codeLanguages;
     }
 
     /**
@@ -204,8 +204,8 @@ class Problem
      */
     public function addCodeLanguage(CodeLanguage $codeLanguage): self
     {
-        if (!$this->code_languages->contains($codeLanguage)) {
-            $this->code_languages[] = $codeLanguage;
+        if (!$this->codeLanguages->contains($codeLanguage)) {
+            $this->codeLanguages[] = $codeLanguage;
         }
 
         return $this;
@@ -219,7 +219,7 @@ class Problem
      */
     public function removeCodeLanguage(CodeLanguage $codeLanguage): self
     {
-        $this->code_languages->removeElement($codeLanguage);
+        $this->codeLanguages->removeElement($codeLanguage);
 
         return $this;
     }
