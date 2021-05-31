@@ -19,32 +19,7 @@ class SolutionRepository extends ServiceEntityRepository
         parent::__construct($registry, Solution::class);
     }
 
-    // /**
-    //  * @return Solution[] Returns an array of Solution objects
-    //  */
-    /*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('s')
-            ->andWhere('s.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('s.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?Solution
-    {
-        return $this->createQueryBuilder('s')
-            ->andWhere('s.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
+    /**
+     * @todo - będzie to wyglądało praktycznie tak samo jak przy postach, więc najpierw tam trzbeba skończyć i tu skopiować
+     */
 }

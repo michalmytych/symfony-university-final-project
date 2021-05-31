@@ -19,32 +19,7 @@ class ProblemRepository extends ServiceEntityRepository
         parent::__construct($registry, Problem::class);
     }
 
-    // /**
-    //  * @return Problem[] Returns an array of Problem objects
-    //  */
-    /*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('p.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?Problem
-    {
-        return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
+    /**
+     * @todo - będzie to wyglądało praktycznie tak samo jak przy postach, więc najpierw tam trzbeba skończyć i tu skopiować
+     */
 }
