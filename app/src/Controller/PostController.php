@@ -51,20 +51,24 @@ class PostController extends AbstractController
     }
 
     /**
-     * Store new post
+     * Create new post
      *
      * @param Request $request
      * @return Response
      *
-     * @Route("/new", name="dashboard_new", methods={"GET","POST"})
+     * @Route("/create", name="dashboard_create", methods={"GET","POST"})
      */
-    public function store(Request $request): Response
+    public function create(Request $request): Response
     {
         $post = new Post();
         $form = $this->createForm(PostType::class, $post);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            /**
+             * @todo - tu bedzie validacja danych
+             * @todo - updatowanie createdAt i updatedAt powinno odbywać się w serwisach
+             */
             $post->setCreatedAt(new \DateTime());
             $this->postRepository->save($post);
 
@@ -78,7 +82,7 @@ class PostController extends AbstractController
 
         return $this->render('app/dashboard/new.html.twig', [
             'post' => $post,
-            'form' => $form->createView(),
+            'form' => $form->createView()
         ]);
     }
 
@@ -113,7 +117,7 @@ class PostController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             // $post->setUpdatedAt() ...
-            // flashMessage
+            $this->addFlash('success', 'message_updated_successfully');
             $this->postRepository->save($post);
 
             return $this->redirectToRoute('dashboard_index');
@@ -126,22 +130,41 @@ class PostController extends AbstractController
     }
 
     /**
-     * Show deletion confirmation form, on POST delete post
+     * Delete post action.
      *
      * @param Request $request
      * @param Post $post
      * @return Response
      *
-     * @todo - moze zmienic na metode delete?
-     *
-     * @Route("/{id}", name="dashboard_delete", methods={"POST"}, requirements={"id": "[1-9]\d"})
+     * @Route(
+     *     "/{id}/delete",
+     *     methods={"GET", "DELETE"},
+     *     requirements={"id": "[1-9]\d*"},
+     *     name="dashboard_delete"
+     * )
      */
     public function delete(Request $request, Post $post): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$post->getId(), $request->request->get('_token'))) {
-            $this->postRepository->destroy($post);
+        $form = $this->createForm(PostType::class, $post, ['method' => 'DELETE']);
+        $form->handleRequest($request);
+
+        if ($request->isMethod('DELETE') && !$form->isSubmitted()) {
+            $form->submit($request->request->get($form->getName()));
         }
 
-        return $this->redirectToRoute('dashboard_index');
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->postRepository->destroy($post);
+            $this->addFlash('success', 'message_deleted_successfully');
+
+            return $this->redirectToRoute('dashboard_index');
+        }
+
+        return $this->render(
+            'app/dashboard/delete.html.twig',
+            [
+                'form' => $form->createView(),
+                'post' => $post
+            ]
+        );
     }
 }

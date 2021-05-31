@@ -56,9 +56,10 @@ class PostRepository extends ServiceEntityRepository
             $entityManager->flush();
         } catch (Exception $e) {
             /**
-             * @todo - how to handle errors in production & debug mode
+             * @todo - czy trzeba tutaj obsługiwać błędy?
              */
-            $this->logger->error('Exception thrown',
+            $this->logger->error(
+                'Exception thrown',
                 [
                     'errorCode' => $e->getCode(),
                     'errorMessage' => $e->getMessage()
@@ -76,23 +77,6 @@ class PostRepository extends ServiceEntityRepository
         $entityManager = $this->getEntityManager();
         try {
             $entityManager->remove($postEntity);
-            $entityManager->flush();
-        } catch (Exception $e) {
-            $this->logger->error('Exception thrown',
-                [
-                    'errorCode' => $e->getCode(),
-                    'errorMessage' => $e->getMessage()
-                ]);
-        }
-    }
-
-    /**
-     * EntityManager flush wrapper function for use in Controller.
-     */
-    public function flushChanges() : void
-    {
-        $entityManager = $this->getEntityManager();
-        try {
             $entityManager->flush();
         } catch (Exception $e) {
             $this->logger->error('Exception thrown',
