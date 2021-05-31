@@ -30,7 +30,8 @@
                         </svg>
                     </th>
                     <th>{{ knp_pagination_sortable(pagination, 'ID ', 'post.id') }}</th>
-                    <th>{{ knp_pagination_sortable(pagination, 'Opublikowano ', 'post.created_at') }}</th>
+                    <th>{{ knp_pagination_sortable(pagination, 'Opublikowano ', 'post.createdAt') }}</th>
+                    <th>{{ knp_pagination_sortable(pagination, 'Opublikowano ', 'post.changedAt') }}</th>
                     <th>{{ knp_pagination_sortable(pagination, 'Tytuł ', 'post.title') }}</th>
                 </tr>
                 </thead>
@@ -44,9 +45,13 @@
                         </td>
                         <td>{{ post.id }}</td>
                         <td>{{ post.createdAt|date('Y/m/d') }}</td>
+                        <td>{{ post.changedAt|date('Y/m/d') }}</td>
                         <td>{{ post.title }}</td>
                         <td>
                             <a href="{{ url('dashboard_show', {id: post.id}) }}">Zobacz</a>
+                        </td>
+                        <td>
+                            <a href="{{ url('dashboard_delete', {id: post.id}) }}">Usuń</a>
                         </td>
                     </tr>
                 {% endfor %}
@@ -54,9 +59,7 @@
             </table>
 
         {% else %}
-            <p>
-                Brak treści
-            </p>
+            <p>Brak treści</p>
         {% endif %}
 
     {% endblock %}

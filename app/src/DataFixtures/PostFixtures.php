@@ -40,7 +40,9 @@ class PostFixtures extends AbstractBaseFixtures
 
             $post->setTitle($this->faker->sentence);
             $post->setTextContent($this->faker->sentence);
-            $post->setCreatedAt($this->faker->dateTimeBetween ('-100 days', '-1 days'));
+            $randomDatetime = $this->faker->dateTimeBetween('-100 days', '-1 days');
+            $post->setCreatedAt($randomDatetime);
+            $post->setChangedAt($randomDatetime);
             $post->addCourse($this->getRandomReference('coursesForPosts'));
             $post->addGroup($this->getRandomReference('groupsForPosts'));
 
